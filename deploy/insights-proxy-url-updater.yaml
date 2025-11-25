@@ -43,8 +43,9 @@ spec:
                         endpoint: https://api.openshift.com/api/accounts_mgmt/v1/cluster_transfers/
                         interval: 0h1m0s
                     proxy:
-                        httpsProxy: 'http://{{hub
-                          (with $svc := lookup "v1" "Service" "insights-proxy" "insights-proxy-service" hub) 
-                          (with $ing := index $svc.status.loadBalancer.ingress 0) 
-                          (if $ing.hostname $ing.hostname $ing.ip) 
-                        hub}}:80'
+                        httpsProxy: >-
+                          http://{{hub
+                            (with $svc := lookup "v1" "Service" "insights-proxy" "insights-proxy-service" hub)
+                            (with $ing := index $svc.status.loadBalancer.ingress 0)
+                            (if $ing.hostname $ing.hostname $ing.ip)
+                          hub}}:80
